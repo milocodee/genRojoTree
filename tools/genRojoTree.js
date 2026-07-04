@@ -30,7 +30,7 @@ function getVirtualPath(filepath) {
 
   if (filename === "init") {
     name = folderName;
-  } else if (["server", "client", "utils", "types"].includes(filename.toLowerCase())) {
+  } else if (["server", "client", "utils", "types", "component"].includes(filename.toLowerCase())) {
     name = folderName + toPascalCase(filename);
   } else {
     name = filename;
@@ -48,7 +48,7 @@ function getVirtualPath(filepath) {
 }
 
 const tree = {
-  name: "genrojotree",
+  name: "game",
   tree: {
     $className: "DataModel",
 
@@ -56,7 +56,6 @@ const tree = {
       Shared: {
         $className: "Folder",
         Services: { $className: "Folder", },
-        Classes: {  $className: "Folder", },
         Modules: { $className: "Folder", }
       },
       Packages: { $path: "Packages", },
@@ -65,9 +64,8 @@ const tree = {
 
     ServerScriptService: {
       Server: { $path: "src/startup/Server.server.luau", },
+      Components: { $className: "Folder", },
       Services: { $className: "Folder", },
-      Classes: { $className: "Folder", },
-      Modules: { $className: "Folder", },
     },
 
     StarterPlayer: {
@@ -126,4 +124,4 @@ walk(BASE_PATH, (filepath) => {
 });
 
 fs.writeFileSync("default.project.json", JSON.stringify(tree, null, 2));
-console.log("✅ default.project.json generated.");
+console.log("Generated Tree for Rojo");
